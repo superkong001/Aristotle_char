@@ -182,14 +182,14 @@ def on_btn_click():
 @st.cache_resource
 def load_model():
     # 定义模型路径(modelscope)
-    model_id = 'teloskong/solomon_chart'
-    mode_name_or_path = snapshot_download(model_id, revision='master')
+    # model_id = 'teloskong/solomon_chart'
+    # mode_name_or_path = snapshot_download(model_id, revision='master')
 
     # 定义模型路径(xlab)
-    # model_id = 'telos/solomon_chart'
-    # download(model_repo='telos/solomon_chart', 
-    #     model_name='solomon_chart', output='/home/xlab-app-center/.cache/model')
-    # mode_name_or_path = '/home/xlab-app-center/.cache/model'
+    model_id = 'telos/solomon_chart'
+    download(model_repo='telos/solomon_chart', 
+        model_name='solomon_chart', output='/home/xlab-app-center/.cache/model')
+    mode_name_or_path = '/home/xlab-app-center/.cache/model'
 
     # 从预训练的模型中获取模型，并设置模型参数
     model = (AutoModelForCausalLM.from_pretrained(mode_name_or_path,
