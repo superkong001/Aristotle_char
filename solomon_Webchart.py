@@ -29,6 +29,7 @@ from transformers.utils import logging
 
 from transformers import AutoTokenizer, AutoModelForCausalLM  # isort: skip
 from modelscope import snapshot_download
+from openxlab.model import download
 
 logger = logging.get_logger(__name__)
 
@@ -178,13 +179,18 @@ def generate_interactive(
 def on_btn_click():
     del st.session_state.messages
 
-
-# 定义模型路径
-model_id = 'telos/solomon_chart'
-mode_name_or_path = snapshot_download(model_id, revision='master')
-
 @st.cache_resource
 def load_model():
+    # 定义模型路径(modelscope)
+    # model_id = 'teloskong/solomon_chart'
+    # mode_name_or_path = snapshot_download(model_id, revision='master')
+
+    # 定义模型路径(xlab)
+    model_id = 'telos/solomon_chart'
+    download(model_repo='telos/solomon_chart', 
+        model_name='solomon_chart', output='/home/xlab-app-center')
+    mode_name_or_path = '/home/xlab-app-center'
+
     # 从预训练的模型中获取模型，并设置模型参数
     model = (AutoModelForCausalLM.from_pretrained(mode_name_or_path,
                                                   trust_remote_code=True).to(
