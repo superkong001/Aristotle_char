@@ -27,7 +27,8 @@ from transformers.generation.utils import (LogitsProcessorList,
                                            StoppingCriteriaList)
 from transformers.utils import logging
 
-from transformers import AutoTokenizer, AutoModelForCausalLM  # isort: skip
+from modelscope import AutoModelForCausalLM, AutoTokenizer
+# from transformers import AutoTokenizer, AutoModelForCausalLM
 from modelscope import snapshot_download
 from openxlab.model import download
 
@@ -182,23 +183,30 @@ def on_btn_click():
 @st.cache_resource
 def load_model():
     # 定义模型路径(modelscope)
-    # model_id = 'teloskong/solomon_chart'
+    model_id = "teloskong/solomon_chart"
+    model = (
+        AutoModelForCausalLM.from_pretrained(model_id, trust_remote_code=True)
+        .to(torch.bfloat16)
+        .cuda()
+    )
+    tokenizer = AutoTokenizer.from_pretrained(model_id, trust_remote_code=True)
+    
     # mode_name_or_path = snapshot_download(model_id, revision='master')
 
     # 定义模型路径(xlab)
-    model_id = 'telos/solomon_chart'
-    download(model_repo='telos/solomon_chart', 
-        model_name='solomon_chart', output='/home/xlab-app-center/.cache/model')
-    mode_name_or_path = '/home/xlab-app-center/.cache/model'
+    # model_id = 'telos/solomon_chart'
+    # download(model_repo='telos/solomon_chart', 
+    #     model_name='solomon_chart', output='/home/xlab-app-center/.cache/model')
+    # mode_name_or_path = '/home/xlab-app-center/.cache/model'
 
     # 从预训练的模型中获取模型，并设置模型参数
-    model = (AutoModelForCausalLM.from_pretrained(mode_name_or_path,
-                                                  trust_remote_code=True).to(
-                                                      torch.bfloat16).cuda())
-    # 从预训练的模型中获取tokenizer
-    tokenizer = AutoTokenizer.from_pretrained(mode_name_or_path,
-                                              trust_remote_code=True)
-    model.eval()  
+    # model = (AutoModelForCausalLM.from_pretrained(mode_name_or_path,
+    #                                               trust_remote_code=True).to(
+    #                                                   torch.bfloat16).cuda())
+    # # 从预训练的模型中获取tokenizer
+    # tokenizer = AutoTokenizer.from_pretrained(mode_name_or_path,
+    #                                           trust_remote_code=True)
+    # model.eval()  
     return model, tokenizer
 
 
