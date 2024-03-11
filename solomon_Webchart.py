@@ -31,6 +31,7 @@ from modelscope import AutoModelForCausalLM, AutoTokenizer
 # from transformers import AutoTokenizer, AutoModelForCausalLM
 from modelscope import snapshot_download
 from openxlab.model import download
+import os
 
 logger = logging.get_logger(__name__)
 
