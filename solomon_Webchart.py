@@ -191,7 +191,7 @@ def load_model():
     )
     tokenizer = AutoTokenizer.from_pretrained(model_id, trust_remote_code=True)
     
-    # mode_name_or_path = snapshot_download(model_id, revision='master')
+    mode_name_or_path = snapshot_download(model_id, revision='master')
 
     # 定义模型路径(xlab)
     # model_id = 'telos/solomon_chart'
