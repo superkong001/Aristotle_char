@@ -207,7 +207,7 @@ def load_model():
     # tokenizer = AutoTokenizer.from_pretrained(mode_name_or_path,
     #                                           trust_remote_code=True)
     # model.eval()  
-    return model, tokenizer
+    return model, tokenizer, mode_name_or_path
 
 
 def prepare_generation_config():
@@ -253,7 +253,7 @@ def combine_history(prompt):
 def main():
     # torch.cuda.empty_cache()
     print('load model begin.')
-    model, tokenizer = load_model()
+    model, tokenizer, mode_name_or_path = load_model()
     print('load model end.')
 
     user_avator = mode_name_or_path + '/user.png'
