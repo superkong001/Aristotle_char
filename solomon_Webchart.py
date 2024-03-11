@@ -191,23 +191,23 @@ def load_model():
     )
     tokenizer = AutoTokenizer.from_pretrained(model_id, trust_remote_code=True)
     
-    mode_name_or_path = snapshot_download(model_id, revision='master')
+    mode_path = snapshot_download(model_id, revision='master')
 
     # 定义模型路径(xlab)
     # model_id = 'telos/solomon_chart'
+    # mode_path = '/home/xlab-app-center/.cache/model'
     # download(model_repo='telos/solomon_chart', 
-    #     model_name='solomon_chart', output='/home/xlab-app-center/.cache/model')
-    # mode_name_or_path = '/home/xlab-app-center/.cache/model'
+    #     model_name='solomon_chart', output=mode_path)
 
     # 从预训练的模型中获取模型，并设置模型参数
-    # model = (AutoModelForCausalLM.from_pretrained(mode_name_or_path,
+    # model = (AutoModelForCausalLM.from_pretrained(mode_path,
     #                                               trust_remote_code=True).to(
     #                                                   torch.bfloat16).cuda())
     # # 从预训练的模型中获取tokenizer
-    # tokenizer = AutoTokenizer.from_pretrained(mode_name_or_path,
+    # tokenizer = AutoTokenizer.from_pretrained(mode_path,
     #                                           trust_remote_code=True)
     # model.eval()  
-    return model, tokenizer, mode_name_or_path
+    return model, tokenizer, mode_path
 
 
 def prepare_generation_config():
@@ -253,11 +253,14 @@ def combine_history(prompt):
 def main():
     # torch.cuda.empty_cache()
     print('load model begin.')
-    model, tokenizer, mode_name_or_path = load_model()
+    model, tokenizer, mode_path = load_model()
     print('load model end.')
-
-    user_avator = mode_name_or_path + '/user.png'
-    robot_avator = mode_name_or_path + '/Aristotle.png'
+    print("解压后目录结果如下：")
+    print(os.listdir(mode_path))
+    
+    user_avator = mode_path + '/user.png'
+    robot_avator = mode_path + '/Aristotle.png'
+    
 
     st.title('InternLM2-Chat-7B 亚里士多德')
 
