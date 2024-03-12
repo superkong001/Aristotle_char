@@ -27,10 +27,6 @@ from transformers.generation.utils import (LogitsProcessorList,
                                            StoppingCriteriaList)
 from transformers.utils import logging
 
-from modelscope import AutoModelForCausalLM, AutoTokenizer
-# from transformers import AutoTokenizer, AutoModelForCausalLM
-from modelscope import snapshot_download
-from openxlab.model import download
 import os
 
 logger = logging.get_logger(__name__)
@@ -182,8 +178,10 @@ def on_btn_click():
     del st.session_state.messages
 
 @st.cache_resource
-def load_model():
+def load_model():    
     # 定义模型路径(modelscope)
+    # from modelscope import snapshot_download
+    # from modelscope import AutoModelForCausalLM, AutoTokenizer
     # model_id = "teloskong/solomon_chart"
     # model = (
     #     AutoModelForCausalLM.from_pretrained(model_id, trust_remote_code=True)
@@ -195,9 +193,11 @@ def load_model():
     # mode_path = snapshot_download(model_id, revision='master')
 
     # 定义模型路径(xlab)
+    from openxlab.model import download
+    from transformers import AutoTokenizer, AutoModelForCausalLM
     model_id = 'telos/solomon_chart'
     model_name = 'solomon_chart'
-    mode_path = '/home/xlab-app-center/.cache/model' # '/home/xlab-app-center'
+    mode_path = '/home/xlab-app-center' # '/home/xlab-app-center/.cache/model'
     download(model_repo=model_id, model_name=model_name, output=mode_path)
 
     # 从预训练的模型中获取模型，并设置模型参数
