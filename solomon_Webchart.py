@@ -201,7 +201,7 @@ def load_model():
     download(model_repo=model_id, model_name=model_name, output=mode_path)
     print(os.listdir('/home/xlab-app-center'))
     print('model dir')
-    print(os.listdir('/home/xlab-app-center/.cache/model'))
+    # print(os.listdir('/home/xlab-app-center/.cache/model'))
     
     # 从预训练的模型中获取模型，并设置模型参数
     model = (AutoModelForCausalLM.from_pretrained(mode_path,
