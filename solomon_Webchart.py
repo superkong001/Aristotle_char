@@ -198,19 +198,18 @@ def load_model():
     model_id = 'telos/solomon_chart'
     model_name = 'solomon_chart'
     mode_path = '/home/xlab-app-center/.cache/model' # '/home/xlab-app-center'
-    download(model_repo='telos/solomon_chart', 
-        model_name='solomon_chart', output=mode_path)
+    download(model_repo=model_id, model_name=model_name, output=mode_path)
 
     # 从预训练的模型中获取模型，并设置模型参数
-    model = (AutoModelForCausalLM.from_pretrained(model_id,
+    model = (AutoModelForCausalLM.from_pretrained(mode_path,
                                                   trust_remote_code=True).to(
                                                       torch.bfloat16).cuda())
     
     # 从预训练的模型中获取tokenizer
-    tokenizer = AutoTokenizer.from_pretrained(model_id,
+    tokenizer = AutoTokenizer.from_pretrained(mode_path,
                                               trust_remote_code=True)
 
-    download(model_repo=model_id, model_name=model_name, output=mode_path)
+    
     # model.eval()  
     
     return model, tokenizer, mode_path
