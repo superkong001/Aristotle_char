@@ -201,11 +201,11 @@ def load_model():
         model_name='solomon_chart', output=mode_path)
 
     # 从预训练的模型中获取模型，并设置模型参数
-    model = (AutoModelForCausalLM.from_pretrained(mode_path,
+    model = (AutoModelForCausalLM.from_pretrained(model_id,
                                                   trust_remote_code=True).to(
                                                       torch.bfloat16).cuda())
     # 从预训练的模型中获取tokenizer
-    tokenizer = AutoTokenizer.from_pretrained(mode_path,
+    tokenizer = AutoTokenizer.from_pretrained(model_id,
                                               trust_remote_code=True)
     # model.eval()  
     return model, tokenizer, mode_path
