@@ -205,12 +205,14 @@ def load_model():
     model = (AutoModelForCausalLM.from_pretrained(model_id,
                                                   trust_remote_code=True).to(
                                                       torch.bfloat16).cuda())
+    
     # 从预训练的模型中获取tokenizer
     tokenizer = AutoTokenizer.from_pretrained(model_id,
                                               trust_remote_code=True)
 
     download(model_repo=model_id, model_name=model_name, output=mode_path)
     # model.eval()  
+    
     return model, tokenizer, mode_path
 
 
