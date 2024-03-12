@@ -190,7 +190,7 @@ def load_model():
     # )
     # tokenizer = AutoTokenizer.from_pretrained(model_id, trust_remote_code=True)
     
-    # mode_path = snapshot_download(model_id, revision='master')
+    # model_path = snapshot_download(model_id, revision='master')
 
     # 定义模型路径(xlab)
     from openxlab.model import download
@@ -202,18 +202,18 @@ def load_model():
     download(model_repo=model_id, model_name=model_name)
     
     # 从预训练的模型中获取模型，并设置模型参数
-    model = (AutoModelForCausalLM.from_pretrained(mode_path,
+    model = (AutoModelForCausalLM.from_pretrained(model_path,
                                                   trust_remote_code=True).to(
                                                       torch.bfloat16).cuda())
     
     # 从预训练的模型中获取tokenizer
-    tokenizer = AutoTokenizer.from_pretrained(mode_path,
+    tokenizer = AutoTokenizer.from_pretrained(model_path,
                                               trust_remote_code=True)
 
     
     # model.eval()  
     
-    return model, tokenizer, mode_path
+    return model, tokenizer, model_path
 
 
 def prepare_generation_config():
