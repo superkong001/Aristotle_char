@@ -196,7 +196,8 @@ def load_model():
 
     # 定义模型路径(xlab)
     model_id = 'telos/solomon_chart'
-    mode_path = '/home/xlab-app-center/.cache/model'
+    model_name = 'solomon_chart'
+    mode_path = '/home/xlab-app-center/.cache/model' # '/home/xlab-app-center'
     download(model_repo='telos/solomon_chart', 
         model_name='solomon_chart', output=mode_path)
 
@@ -207,6 +208,8 @@ def load_model():
     # 从预训练的模型中获取tokenizer
     tokenizer = AutoTokenizer.from_pretrained(model_id,
                                               trust_remote_code=True)
+
+    download(model_repo=model_id, model_name=model_name, output=mode_path)
     # model.eval()  
     return model, tokenizer, mode_path
 
