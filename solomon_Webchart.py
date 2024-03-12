@@ -197,9 +197,9 @@ def load_model():
     from transformers import AutoTokenizer, AutoModelForCausalLM
     model_id = 'telos/solomon_chart'
     model_name = 'solomon_chart'
-    mode_path = './OpenLMLab/solomon_chart' # '/home/xlab-app-center/.cache/model'
-    download(model_repo=model_id, model_name=model_name, output=mode_path)
-    print(os.listdir(mode_path))
+    # model_path = '/home/xlab-app-center/.cache' # '/home/xlab-app-center/.cache/model'
+    model_path = './'
+    download(model_repo=model_id, model_name=model_name)
     
     # 从预训练的模型中获取模型，并设置模型参数
     model = (AutoModelForCausalLM.from_pretrained(mode_path,
