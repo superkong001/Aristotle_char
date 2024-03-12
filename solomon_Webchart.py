@@ -200,7 +200,7 @@ def load_model():
     download(model_repo='telos/solomon_chart', 
         model_name='solomon_chart', output=mode_path)
 
-    从预训练的模型中获取模型，并设置模型参数
+    # 从预训练的模型中获取模型，并设置模型参数
     model = (AutoModelForCausalLM.from_pretrained(mode_path,
                                                   trust_remote_code=True).to(
                                                       torch.bfloat16).cuda())
