@@ -259,8 +259,8 @@ def main():
     print("解压后目录结果如下：")
     print(os.listdir(mode_path))
     
-    user_avator = mode_path + '/user.png'
-    robot_avator = mode_path + '/Aristotle.png'
+    user_avator = './user.png'
+    robot_avator = './Aristotle.png'
     
 
     st.title('InternLM2-Chat-7B 亚里士多德')
